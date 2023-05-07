@@ -1,8 +1,36 @@
 body{
     background-color:Ivory;
     }
+
+table, th, td {
+  border: 1px solid black;
+}
+
+tr:nth-child(even) {
+  background-color: #D6EEEE;
+}
+
+#jsonZone {
+    background-color:red;
+}
+#metrics {
+    background-color:grey;
+}
+
+#excelZone {
+    background-color:green;
+}
+
+#networks {
+    background-color:blue;
+}
+
+#excelTable{
+    width:50%;
+}
+
 #inputJson{
-    background-color:Beige;
+    background-color:red;
     width:50%;
     border-style: solid;
     border-width: 2px;

@@ -5,17 +5,20 @@
 Apprendre Javascript autour d'un projet d'extraction dans un fichier Excel, des comptes utilisateurs de l'application Genesys Cloud.
 
 Dans un premier temps, on va récupérer une extraction des comptes utilisateurs au format JSON puis on va extraire de ce JSON les informations pertinentes.
-Les informations seront présentées dans une page HTML au format CSV.
+Les informations seront présentées dans une page HTML au format CSV ou dans un tableau HTML.
 
-- ID de l'utilisate,
+- ID de l'utilisateur,
 - Nom complet,
+- Prénom,
+- Nom,
 - Email,
-- Login,
-- Division,
 - Poste,
-- ...
+- Département,
+- Titre,
+- Identifiant,
+- Division
 
-Elles seront ensuite copiées puis collées dans un fichier Excel pour diffusion et exploitation.
+Elles seront ensuite copiées et collées dans un fichier Excel pour diffusion et exploitation.
 
 ## Pré-requis
 - Un accès à Genesys Cloud,
