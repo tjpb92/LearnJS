@@ -1,38 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Liste des utilisateurs Genesys Cloud</title>
-    <script src='./js/cours.js' async></script>
+    <meta charset="UTF-8">
+    <title>Extraction des comptes utilisateur de Genesys Cloud</title>
+    <script src='./js/main.js' async></script>
     <link rel="stylesheet" href="./css/style.css">
-<!--    <link rel="icon" href="favicon.ico">-->
+    <link rel="icon" href="./img/favicon.ico">
 </head>
 <body>
-
-<h2>Liste des utilisateurs Genesys Cloud</h2>
-
-<div id="inputJson">
-    <label for="json">Put your Json here:</label>
-    <textarea id="json" name="json"
-              rows="10" cols="40">
-{"foo":"bar"}
-</textarea>
-    <button onclick="processJson()">Process</button>
-</div>
-
-<div id="outputResults">
-    <label for="results">Here are the results:</label>
-    <textarea id="results" name="results"
-              rows="10" cols="40">
-</textarea>
-</div>
-
-<p id="txt">texte</p>
-<p id="class">class</p>
-<p id="demo">Id;Name;Email;Poste;Departement;Titre;Username;Division<br></p>
-<p id="obj">object</p>
-
-<div id="netorks">
-    <a href="https://github.com/tjpb92/LearnJS">GitHub</a>
+<div id="workingArea">
+    <div>
+        <h1>Extraction des comptes utilisateur de Genesys Cloud</h1>
+    </div>
+    <div id="jsonZone">
+        <div id="jsonZoneTitle">
+            <label for="json">Déposez le JSON ci-dessous</label>
+        </div>
+        <div id="jsonZoneData">
+            <textarea id="json" name="json" placeholder="{'foo':'bar'}"
+                      rows="10" cols="40">
+            </textarea>
+        </div>
+        <div id="jsonZoneButton">
+            <button id="processJson" onclick="processJson()">Process</button>
+        </div>
+    </div>
+    <div id="metrics">
+        <div id="metricsDivTitle">
+            <label id="metricsTitle">Métriques</label>
+        </div>
+        <div id="metricsDivData">
+            <p id="metricsData">...</p>
+        </div>
+    </div>
+    <div id="excelZone">
+        <div id="excelZoneDivTitle">
+            <label id="excelZoneTitle">Export vers Excel</label>
+        </div>
+        <div id="excelZoneDivData">
+            <div id="excelZoneData">
+                <table id="excelTable">
+                    <thead id="excelTitle">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom Complet</th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Poste</th>
+                        <th>Departement</th>
+                        <th>Titre</th>
+                        <th>Username</th>
+                        <th>Division</th>
+                    </tr>
+                    </thead>
+                    <tbody  id="excelData">
+                    </tbody>
+                </table>
+                <p id="excelCount">... compte(s)</p>
+            </div>
+        </div>
+    </div>
+    <div id="networks">
+        <a href="https://github.com/tjpb92/LearnJS">GitHub</a>
+    </div>
 </div>
 </body>
 </html>
