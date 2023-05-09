@@ -1,5 +1,8 @@
 body{
-    background-color:Ivory;
+    background-color: #fdfdfd;
+    color: #444a52;
+    font-family: Roboto,sans-serif;
+    font-size: 14px;
     }
 
 table, th, td {
@@ -10,20 +13,23 @@ tr:nth-child(even) {
   background-color: #D6EEEE;
 }
 
+/*
 #jsonZone {
     background-color:red;
 }
-#metrics {
-    background-color:grey;
-}
+*/
 
+/*
 #excelZone {
     background-color:green;
 }
+*/
 
+/*
 #networks {
     background-color:blue;
 }
+*/
 
 #excelTable{
     width:50%;
