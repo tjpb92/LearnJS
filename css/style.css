@@ -45,3 +45,7 @@ tr:nth-child(even) {
 #json{
     width:50%;
 }
+
+#buttonBar{
+    display: flex;
+}

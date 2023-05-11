@@ -27,7 +27,8 @@ function addQueue(entity) {
     const name = Object.hasOwn(entity, 'name') ? entity.name : "";
     var qty = 0;
 
-    if (name.startsWith("A_") || name.startsWith("E_")) {
+//    if (name.startsWith("A_") || name.startsWith("E_")) {
+    if (name.length > 0) {
         const id = Object.hasOwn(entity, 'id') ? entity.id : "";
         const memberCount = Object.hasOwn(entity, 'memberCount') ? entity.memberCount : "";
 
