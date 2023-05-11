@@ -35,7 +35,33 @@ function Skill() {
         document.getElementById("excelTable").outerHTML = this.tableTemplate;
     }
 
+    this.addSkill = function() {
+        const entity = arguments[0];
+
+        const id = Object.hasOwn(entity, 'id') ? entity.id : "";
+        const name = Object.hasOwn(entity, 'name') ? entity.name : "";
+        const state = Object.hasOwn(entity, 'state') ? capitalize(entity.state): "";
+
+        var qty = 0;
+
+//      Tests if id and name are defined
+        if (Boolean(id) && Boolean(name)) {
+            var tr = "<tr>";
+            tr += `<td>${id}</td>`;
+            tr += `<td>${name}</td>`;
+            tr += `<td>${state}</td>`;
+            tr += "</tr>";
+//            console.log(tr);
+
+            document.getElementById("excelData").innerHTML += tr;
+            qty++;
+        }
+
+        return(qty);
+    }
+
     this.initTableTemplate();
+
 }
 
 function Context(item) {
@@ -47,21 +73,15 @@ function Context(item) {
     item.publishTableTemplate();
 }
 
-var skill = new Skill();
-//    console.log(skill);
-
-var context = new Context(skill);
-
 function selectDivision() {
     console.log("selectDivision()");
     context.division = document.getElementById("division").value;
     }
 
-function initQueueContext() {
-    console.log("initQueueContext()");
+function initContext() {
+    console.log("initContext()");
     selectDivision();
 
-    selectSkills();
     console.log(context);
 
     }
@@ -78,7 +98,7 @@ function selectQueues() {
 
 function selectSkills() {
     console.log("selectSkills()");
-    context.item = "skills";
+    context.item = skill;
     }
 
 function resetFields() {
@@ -89,11 +109,10 @@ function resetFields() {
 function processJson(){
 
     var nbSkills = 0;
-//    initQueueContext();
 
     const json = document.getElementById("json").value.trim();
 //    console.log(json);
-	if(json.startsWith("{") && json.endsWith("}")){
+	if(json.trim().startsWith("{") && json.trim().endsWith("}")){
 	    const obj = JSON.parse(json);
 //	    console.log(obj);
 
@@ -101,7 +120,7 @@ function processJson(){
 //        console.log(entities.length);
 //        console.log(entities[0]);
         for (entity of entities) {
-            nbSkills += addSkill(entity);
+            nbSkills += context.item.addSkill(entity);
             }
 
 	    document.getElementById("excelCount").innerHTML = `${nbSkills} compétence(s)`;
@@ -113,22 +132,11 @@ function processJson(){
 
 }
 
-function addSkill(entity) {
-    const name = Object.hasOwn(entity, 'name') ? entity.name : "";
-    const id = Object.hasOwn(entity, 'id') ? entity.id : "";
-    const state = Object.hasOwn(entity, 'state') ? capitalize(entity.state): "";
+var skill = new Skill();
+//    console.log(skill);
 
-    var qty = 1;
+var context = new Context(skill);
+console.log(context);
 
-    var tr = "<tr>";
-    tr += `<td>${id}</td>`;
-    tr += `<td>${name}</td>`;
-    tr += `<td>${state}</td>`;
-    tr += "</tr>";
-//    console.log(tr);
 
-    document.getElementById("excelData").innerHTML += tr;
-
-    return(qty);
-}
 
