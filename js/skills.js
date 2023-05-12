@@ -2,6 +2,27 @@ function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+function Division() {
+    this.title = "Extraction des divisions de l'organisation sous Genesys Cloud"
+    this.tableTemplate = "";
+    this.row = "";
+    this.url = "https://api.mypurecloud.de/api/v2/authorization/divisions";
+}
+Division.prototype.publishTitle = function() {
+    document.getElementById("title").innerHTML = this.title;
+}
+Division.prototype.fetchData = async function() {
+    let response = await fetch(this.url);
+
+    console.log(response.status); // 200
+    console.log(response.statusText); // OK
+
+    if (response.status === 200) {
+        let json = await response.json();
+        console.log(json);
+    }
+}
+
 function Skill() {
     this.title = "Extraction des compétences de Genesys Cloud";
     this.tableTemplate = "";
@@ -99,6 +120,16 @@ function selectQueues() {
 function selectSkills() {
     console.log("selectSkills()");
     context.item = skill;
+    }
+
+function selectDivisions() {
+    console.log("selectDivisions()");
+    const division = new Division();
+    console.log(division);
+    division.publishTitle();
+//    division.fetchData();     // Unauthorized !!!
+
+    context.item = division;
     }
 
 function resetFields() {
