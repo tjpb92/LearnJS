@@ -1,32 +1,8 @@
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-function Division() {
-    this.title = "Extraction des divisions de l'organisation sous Genesys Cloud"
+function EmailRoutes() {
+    this.title = "Extraction des routages par mail de Genesys Cloud";
     this.tableTemplate = "";
     this.row = "";
-    this.url = "https://api.mypurecloud.de/api/v2/authorization/divisions";
-}
-Division.prototype.publishTitle = function() {
-    document.getElementById("title").innerHTML = this.title;
-}
-Division.prototype.fetchData = async function() {
-    let response = await fetch(this.url);
-
-    console.log(response.status); // 200
-    console.log(response.statusText); // OK
-
-    if (response.status === 200) {
-        let json = await response.json();
-        console.log(json);
-    }
-}
-
-function Skill() {
-    this.title = "Extraction des compétences de Genesys Cloud";
-    this.tableTemplate = "";
-    this.row = "";
+    this.domain = "ANSTEL.mypurecloud.de";   // Faire mieux plus tard ...
 
     this.publishTitle = function() {
         document.getElementById("title").innerHTML = this.title;
@@ -36,7 +12,9 @@ function Skill() {
         var row = "<tr>";
         row += "<th>Id</th>";
         row += "<th>Nom</th>";
-        row += "<th>Etat</th>";
+        row += "<th>Email</th>";
+        row += "<th>MailFlow</th>";
+        row += "<th>SpamFlow</th>";
         row += "</tr>";
 //        console.log(row);
 
@@ -56,12 +34,14 @@ function Skill() {
         document.getElementById("excelTable").outerHTML = this.tableTemplate;
     }
 
-    this.addSkill = function() {
+    this.addEmailRoutes = function() {
         const entity = arguments[0];
 
         const id = Object.hasOwn(entity, 'id') ? entity.id : "";
-        const name = Object.hasOwn(entity, 'name') ? entity.name : "";
-        const state = Object.hasOwn(entity, 'state') ? capitalize(entity.state): "";
+        const name = Object.hasOwn(entity, 'fromName') ? entity.fromName : "";
+        const email = Object.hasOwn(entity, 'pattern') ? entity.pattern : "";
+        const mailFlow = "";
+        const spamFlow = "";
 
         var qty = 0;
 
@@ -70,7 +50,9 @@ function Skill() {
             var tr = "<tr>";
             tr += `<td>${id}</td>`;
             tr += `<td>${name}</td>`;
-            tr += `<td>${state}</td>`;
+            tr += `<td>${email}</td>`;
+            tr += `<td>${mailFlow}</td>`;
+            tr += `<td>${spamFlow}</td>`;
             tr += "</tr>";
 //            console.log(tr);
 
@@ -85,14 +67,11 @@ function Skill() {
 
 }
 
-function Context(item) {
-    this.divisionFilter = "all";
-    this.item = item;
+var emailRoutes = new EmailRoutes();
+//    console.log(emailRoute);
 
-//    console.log(typeof division);
-    item.publishTitle();
-    item.publishTableTemplate();
-}
+var context = new Context(emailRoutes);
+console.log(context);
 
 function selectDivision() {
     console.log("selectDivision()");
@@ -104,7 +83,6 @@ function initContext() {
     selectDivision();
 
     console.log(context);
-
     }
 
 function selectAgents() {
@@ -132,6 +110,17 @@ function selectDivisions() {
     context.item = division;
     }
 
+
+function selectEmailRoutes() {
+    console.log("selectEmailRoutes()");
+    const emailRoutes = new EmailRoutes();
+    console.log(division);
+    emailRoutes.publishTitle();
+//    division.fetchData();     // Unauthorized !!!
+
+    context.item = emailRoutes;
+    }
+
 function resetFields() {
     console.log("resetFields()");
     context.item = "skills";
@@ -139,7 +128,7 @@ function resetFields() {
 
 function processJson(){
 
-    var nbSkills = 0;
+    var nbEmailRoutes = 0;
 
     const json = document.getElementById("json").value.trim();
 //    console.log(json);
@@ -151,10 +140,10 @@ function processJson(){
 //        console.log(entities.length);
 //        console.log(entities[0]);
         for (entity of entities) {
-            nbSkills += context.item.addSkill(entity);
+            nbEmailRoutes += context.item.addEmailRoutes(entity);
             }
 
-	    document.getElementById("excelCount").innerHTML = `${nbSkills} compétence(s)`;
+	    document.getElementById("excelCount").innerHTML = `${nbEmailRoutes} routage(s) par mail`;
 	} else {
 	    const errmsg = "ERREUR : les données fournies ne sont pas au format JSON";
 	    alert(errmsg);
@@ -163,11 +152,11 @@ function processJson(){
 
 }
 
-var skill = new Skill();
-//    console.log(skill);
+function Context(item) {
+    this.divisionFilter = "all";
+    this.item = item;
 
-var context = new Context(skill);
-console.log(context);
-
-
-
+//    console.log(typeof division);
+    item.publishTitle();
+    item.publishTableTemplate();
+}

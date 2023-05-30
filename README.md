@@ -54,6 +54,7 @@ par division lorsque c'est pertinent.
 
 - [Pierre Giraud - Apprendre à coder en JavaScript | Cours complet (2020)](https://www.pierre-giraud.com/javascript-apprendre-coder-cours/)
 - [NadfriJS](https://www.youtube.com/@NadfriJS)
+- [Steve Griffith - JavaScript Classes vs Prototypes](https://youtu.be/XoQKXDWbL1M)
 - [WeFormYou - Javascript](https://www.youtube.com/hashtag/weformyou)
 - [Tutorial Javascript W3C](https://www.w3schools.com/js/)
 - [Genesys Cloud Developper Center](https://developer.genesys.cloud/)
